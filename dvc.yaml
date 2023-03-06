@@ -6,3 +6,14 @@
 #     - src/stage_01______.py
 #     outs:
 #     - output_data_of_file_path
+
+# add stages here 
+stages:
+  get_data:
+    cmd: python src/stage_01_get_data.py --config=configs/config.yaml
+    deps:
+      - src/stage_01_get_data.py
+      - src/utils/common.py
+      - configs/config.yaml
+    outs:
+      - data/data.xml
