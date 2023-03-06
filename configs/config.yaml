@@ -2,19 +2,25 @@
 
 artifacts:
   ARTIFACTS_DIR: artifacts
-  TRAINED_MODEL_DIR: model
-  BASE_MODEL_DIR: base_model
-  BASE_MODEL_NAME: base_model.h5
-  UPDATED_BASE_MODEL_NAME: updated_base_model.h5
-  CHECKPOINT_DIR: checkpoints
-  BASE_LOG_DIR: base_model_dir
-  TENSORBOARD_ROOT_LOG_DIR: tensorboard_log_dir
-  CALLBACKS_DIR: callbacks
+  PREPARED_DATA: prepared
+  TRAIN_DATA: train.tsv
+  TEST_DATA: test.tsv
+  FEATURIZED_DATA: features
+  FEATURIZED_TRAIN_DATA: train.pkl
+  FEATURIZED_TEST_DATA: test.pkl
+  MODEL_DIR: model
+  MODEL_NAME: model.pkl
 
-source_download_dirs:
-  - path_to_data_1
-  - path_to_data_1
+source_data_url: https://drive.google.com/file/d/1agyr-U_DGlH43ntuPmAoUZ5Q4veXK_Pd/view?usp=sharing
 
-local_data_dirs:
-  - path_to_local_data_1
-  - path_to_local_data_2
+source_download_dir:
+  data_dir: data
+  data_file: data.xml
+
+
+plots:
+  PRC: prc.json
+  ROC: roc.json
+
+metrics:
+  SCORES: scores.json
