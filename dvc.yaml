@@ -1,13 +1,4 @@
 # add stages here 
-# stages:
-#   stage_name:
-#     cmd: python src/stage_01______.py
-#     deps:
-#     - src/stage_01______.py
-#     outs:
-#     - output_data_of_file_path
-
-# add stages here 
 stages:
   get_data:
     cmd: python src/stage_01_get_data.py --config=configs/config.yaml
@@ -17,7 +8,6 @@ stages:
       - configs/config.yaml
     outs:
       - data/data.xml
-
 
   prepare_data:
     cmd: python src/stage_02_prepare.py --config=configs/config.yaml --params=params.yaml
@@ -49,3 +39,38 @@ stages:
     outs:
       - artifacts/features/train.pkl
       - artifacts/features/test.pkl
+
+  train:
+    cmd: python src/stage_04_train.py --config=configs/config.yaml --params=params.yaml
+    deps:
+      - src/stage_04_train.py
+      - src/utils/common.py
+      - artifacts/features/train.pkl
+      - configs/config.yaml
+    params:
+      - train.seed
+      - train.n_est  
+      - train.min_split  
+    outs:
+      - artifacts/model/model.pkl
+
+  evaluate:
+    cmd: python src/stage_05_evaluate.py --config=configs/config.yaml
+    deps:
+      - src/stage_05_evaluate.py
+      - src/utils/common.py
+      - artifacts/features/test.pkl
+      - configs/config.yaml
+      - artifacts/model/model.pkl
+    metrics:
+      - scores.json:
+          cache: false
+    plots:
+      - prc.json:
+          cache: false
+          x: recall
+          y: precision
+      - roc.json:
+          cache: false
+          x: fpr
+          y: tpr

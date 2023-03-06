@@ -1,7 +1,7 @@
 ### dependency
 tqdm
 dvc
-dvc[s3]
+#dvc[s3]
 pandas
 numpy
 PyYAML
